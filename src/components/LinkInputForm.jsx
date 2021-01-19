@@ -18,6 +18,7 @@ export default function LinkInputForm({ updateLinksList }) {
           type="button"
           onClick={() => {
             updateLinksList(newLink);
+            setNewLink('');
           }}
         >
           Submit

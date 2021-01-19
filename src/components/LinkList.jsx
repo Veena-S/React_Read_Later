@@ -1,15 +1,34 @@
 import React, { useState } from 'react';
 
-export default function LinkList({ linksList }) {
+export default function LinkList({ linksList, addReadLink }) {
   return (
-    <div>
+    <div className="container">
       <div className="links-list">
-        <h4>Added Links</h4>
+        <h4 className="mt-4">Added Links</h4>
         <ul>
           {linksList.map((link, index) => (
-            <li key={`link-${Number(index).toString()}`}>
-              <a href={link}>{link}</a>
-            </li>
+            <div className="row">
+              <li key={`link-${Number(index).toString()}`}>
+                <div className="col-sm">
+                  <a href={link}>{link}</a>
+                </div>
+                <div className="col-sm">
+                  <input
+                    type="checkbox"
+                    id={`link-${index}`}
+                    name={`link-${index}`}
+                    value={link}
+                    onClick={(event) => {
+                      if (event.target.checked)
+                      {
+                        addReadLink(event.target.value, index);
+                      }
+                    }}
+                  />
+                  <label htmlFor={`link-${index}`}> Mark As Read</label>
+                </div>
+              </li>
+            </div>
           ))}
         </ul>
       </div>

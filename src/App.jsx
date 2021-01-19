@@ -6,16 +6,24 @@ import ReadLinks from './components/ReadLinks.jsx';
 
 export default function App() {
   const [linksList, setLinksList] = useState([]);
+  const [readLinksList, setReadLinksList] = useState([]);
 
   const updateLinksList = (newLinkSubmitted) => {
     setLinksList([...linksList, newLinkSubmitted]);
   };
 
+  const addReadLink = (readLink, linkItemIndex) => {
+    const updatedList = [...linksList];
+    updatedList.splice(linkItemIndex, 1);
+    setLinksList([...updatedList]);
+    setReadLinksList([...readLinksList, readLink]);
+  };
+
   return (
     <div>
       <LinkInputForm updateLinksList={updateLinksList} />
-      <LinkList linksList={linksList} />
-      <ReadLinks />
+      <LinkList linksList={linksList} addReadLink={addReadLink} />
+      <ReadLinks readLinksList={readLinksList} />
     </div>
   );
 }
